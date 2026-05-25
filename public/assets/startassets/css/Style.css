@@ -1,0 +1,438 @@
+body {
+    font-family:'Century Gothic', sans-serif;
+}
+
+/*header*/
+
+header {
+    margin-bottom: 30px;
+}
+header .site-header {
+    width: 300px; max-width: 200px; float: left;
+    margin-top: 0;
+}
+
+header .site-name {
+    max-width: 200px; width: 300px; float: right; margin-right: 130px;
+}
+
+/*Global*/
+h1,h2,h3,h4,h5,h6 {
+    -webkit-font-smoothing:antialiased;
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    font-family: 'bebas-neue';
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h1,h2 {
+    margin: 0 0 40px;
+}
+h3 {
+    margin: 20px 0;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    font-family: 'Century Gothic';
+}
+
+
+
+.main-content {
+    min-height: 500px;
+    margin-top: 70px;
+}
+
+footer {
+    background:white;
+}
+
+header ul li {
+    width: 28px;
+    margin-top: 14px;
+}
+.badge.social {
+    font-size: 15px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 100%;
+    -moz-border-radius:100%;
+    -webkit-border-radius: 100%;
+    color: white;
+    background: #000;
+    margin: 0;
+    padding: 0;
+}
+.badge.social.instagram {
+   
+    padding-left: 1px;
+}
+.badge.social.Twitter:hover {
+    background: #55acee;
+}
+.badge.social.facebook:hover {
+    background: #3b5998;
+}
+.badge.social.instagram:hover {
+    background: #bc2a8d;
+}
+/*Page 2 Slide arrows*/
+
+.story .glyphicon-chevron-right,
+.story .glyphicon-chevron-left {
+    color: #000;
+    position: relative;
+    font-size: 44px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.story .glyphicon-chevron-left {
+    top: -300px;
+    left: -80px;
+    
+}
+
+.story .glyphicon-chevron-right{
+    top: 300px;
+    left: 900px;
+}
+/*Page 3 Slide arrows*/
+.fullstory {
+    position: relative;
+   
+    
+}
+
+.fullstory .glyphicon-chevron-right, .fullstory .glyphicon-chevron-left{
+    color: white;
+    position: relative;
+    font-size: 44px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    
+}
+ .fullstory .glyphicon-chevron-left {
+     top: -370px;
+    left: -60px;
+}
+
+.fullstory .glyphicon-chevron-right  {
+    left: 1140px;
+    top: 370px;
+    
+    
+}
+
+
+/*fullscreen window*/
+
+.fullscreen {
+    position: relative;
+    top: -19px;
+    left: 55px;
+}
+
+.modal-dialog {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.modal-content {
+ background: #000;
+ min-height: 800px;
+}
+
+.modal-body div.fullstory {
+    width: 1120px;
+    margin: auto;
+    
+}
+.modal-body div.fullstory_slide {
+    width: 1120px;
+    outline: 0;
+    
+
+}
+.modal-body div.fullstory_slide:focus {
+    border-color: #000;
+}
+.modal-body div.fullstory_slide img {
+    height: 700px;
+    margin: auto;
+    border: none;
+    outline: 0;
+}
+/*image hovers*/
+
+
+
+.grid li {
+	width: 34%;
+	display: inline-block;
+	cursor: pointer;
+    margin-right: -15px;
+}
+
+.grid li figure{
+	width: 100%;
+	position: relative;
+    height: inherit;
+}
+
+.grid li figure img{
+	position:relative;
+	display: inline-block;
+    width: 100%;
+}
+
+.grid li figure figcaption{
+	position: absolute;
+	top:0;
+	left: 0;
+	background: rgba(255,255,255,0.8);
+	color:black;
+    text-align: right;
+    width: 100%;
+    display: block;
+    height: 100%;
+
+}
+.grid li figure a.story_link {
+    width: 100%;
+    display: block;
+    height: 330px;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+.grid figcaption h3{
+	font-size: 24px;
+	color:black;
+	margin:0;
+	padding:0;
+    text-align: right;
+
+}
+
+.grid figcaption p {
+	margin:0;
+	padding:0;
+	font-size: 16px;
+	color:black;
+}
+
+
+.cs-style-1 figcaption{
+	width: 100%;
+    opacity: 0;
+    backface-visibility: hidden;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.cs-style-1 figure:hover figcaption,
+.cs-style-1 figure.cs-hover figcaption {
+	opacity: 1;
+    backface-visibility: visible;
+	transform: translate(0px, 0px);
+}
+
+.cs-style-1 figcaption h3{
+	margin-top: 30px;
+
+}
+
+.cs-style-1 figcaption p{
+	display: block;
+}
+
+.cs-style-1 figcaption a{
+	margin-top: 30px;
+}
+
+.cs-style-1 figcaption p.role {
+ 
+}
+
+.grid .fa-share-alt {
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 22px;
+    background: black;
+    position: relative;
+    top: 50px;
+    border-radius: 100%;
+    -moz-border-radius:100%;
+    -webkit-border-radius: 100%;
+    line-height: 40px;
+    text-align: center;
+    
+}
+
+.grid .fa-share-alt:hover {
+      color: black;
+    background: white;
+    transition: all 0.3s;
+}
+
+.story {
+    width: 75%;
+    margin: auto;
+    position: relative;
+}
+div.story_slide.slick-slide {
+    width: 75%;
+}
+div.story_slide.slick-slide img {
+    width: 100%;
+}
+
+
+
+
+/* preload css */
+
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(images/loader-64x/Preloader_2.gif) center no-repeat #fff;
+}
+
+/*Media Queries*/
+
+
+@media screen and (max-width: 541px) {
+
+    .grid li , .grid li figure, .grid li figure figcaption , .grid li figure img {
+        margin-bottom: 40px;
+        width: 300px;
+        height: 250px;
+    }
+    .story-header {
+    margin-bottom: 69px;
+}
+.cs-style-1 figcaption h3,.cs-style-1 figcaption h3 a {
+	margin: 0;
+    padding: 0;
+
+}
+
+
+.modal-dialog {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.modal-content {
+    width: 100%;height: 180px;
+}
+.modal-body {
+     width: 100%;
+     height: 180px;
+}
+.modal-body div.fullstory {
+    margin: 0;
+    height: 210px;
+}
+div.fullstory_slide.slick-slide {
+    width: 320px;
+    display: normal;
+    height: 210px;
+}
+div.fullstory_slide.slick-slide img {
+    width: 320px;
+    height: 210px;
+    margin: 0;
+
+
+}
+
+
+
+
+.grid li figure figcaption {
+    visibility: visible;
+    opacity: 1;
+    height: 125px;
+}
+.grid li figure figcaption:hover {
+    visibility: visible;
+    opacity: 1;
+     height: 125px;
+}
+    .cs-style-1 figcaption p.role {
+        margin: 0;
+    }
+    .cs-style-1 figcaption a{
+	    margin: 0px;
+}
+    header .site-name , header site-header {
+        max-width: 100px;
+    }
+    header .site-name h1 {
+    font-size: 15px;
+}
+
+    body header .story-nav {
+    display: none;
+}
+    
+ 
+i.glyphicon.glyphicon-chevron-right.slick-arrow {
+    top: 0px;
+    left: 0px;
+    display: none;
+    font-size: 0px;
+}
+
+
+.grid li figure a.story_link {
+    width: 300px;
+    display: block;
+    height: 125px;
+    padding-right: 15px;
+    padding-top: 10px;
+    text-decoration: none;
+}
+.grid .fa-share-alt {
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+}
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+
+}
+
+
+@media screen and (max-width: 991px) {
+  
+}
+
+@media screen and (max-width: 741px) {
+
+
+}
