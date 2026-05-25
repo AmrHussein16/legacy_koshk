@@ -24,7 +24,7 @@
                         <h4 class="font-bold no-margins" style="text-align: center;">
 
                         </h4>
-                        <h3 style="text-align: center;">Koshk Comics is a social website for comic artists to meet, collaborate and publish their comic books on our mobile apps on Apple and Android smart phones.</h3>
+                        <h3 style="text-align: center;">Koshk Comics is a  website for comic artists to meet, collaborate and publish their comic books on our mobile apps on Apple and Android smart phones.</h3>
                     </div>
                 </div>
                 <div class="row">
