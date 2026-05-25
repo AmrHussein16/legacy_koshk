@@ -1,0 +1,254 @@
+
+@extends('layouts.headeronly')
+
+@section('page-title', 'Home')
+
+@section('content')
+
+<!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+   
+            <div class="item active">
+                <div class="fill col-lg-4" style="border-style:solid;border-width:1px;border-color:#fff;width:70%;background-image:url('./comics/cards/<?php echo $fav[0]['catid'];?>/<?php echo $fav[0]['cardid'];?>/normal-hdpi/story/<?php echo $fav[0]['highlight'];?>.jpg');">
+                <!-- <h2 style="color: #fff;background-color: rgba(245, 245, 245, 0.4);"> <?php echo $fav[0]['cardname'];?>  </h2> -->
+                </div>
+
+                <div class="fill col-lg-8" style="border-style:solid;border-width:1px;border-color:#fff;width:30%;background-image:url('./comics/cards/<?php echo $fav[0]['catid'];?>/<?php echo $fav[0]['cardid'];?>/iphone4/img.jpg');">
+                <h2 style="text-align: center;color: #fff;margin-top: 75%;"> <?php echo $fav[0]['catname'];?>  </h2>
+                </div>
+
+            </div>
+
+            <?php for($i=1;$i<=$fav_count;$i++): ?>
+
+            
+            <div class="item">
+                <div class="fill col-lg-4" style="border-style:solid;border-width:1px;border-color:#fff;width:70%;background-image:url('./comics/cards/<?php echo $fav[$i]['catid'];?>/<?php echo $fav[$i]['cardid'];?>/normal-hdpi/story/<?php echo $fav[$i]['highlight'];?>.jpg');">
+                <!-- <h2 style="color: #fff;background-color: rgba(200, 200, 200, 0.4);height: 130px"> <?php echo $fav[$i]['cardname'];?>  </h2> --> 
+            </div>
+
+            <div class="fill col-lg-8" style="border-style:solid;border-width:1px;border-color:#fff;width:30%;background-image:url('./comics/cards/<?php echo $fav[$i]['catid'];?>/<?php echo $fav[$i]['cardid'];?>/iphone4/img.jpg');">
+                    <h2 style="text-align: center;color: #fff;margin-top: 75%;"> <?php echo $fav[$i]['catname'];?>  </h2>
+                </div>
+            </div>
+
+            <?php endfor; ?>
+
+          
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+
+
+
+    </header>
+
+    <div class="container">
+    <div class="row m-b-lg m-t-lg">
+                <div class="col-md-6">
+
+                    <div class="profile-image">
+                    <img src="http://graph.facebook.com/<?php echo $fid; ?>/picture?type=large" class="img-circle circle-border m-b-md" alt="profile" style="border-color: #ff2f69;">
+                    <!--
+                        <img src="http://graph.facebook.com/<?php echo $fid; ?>/picture?type=large" class="img-circle circle-border m-b-md" alt="profile">--> 
+                    </div>
+                    <div class="profile-info">
+                        <div class="">
+                            <div>
+                                <h2 class="no-margins">
+                                    Welcome <strong><?php echo $fname; ?> <?php echo $lname; ?></strong>
+                                </h2>
+                                <h4>Comics Reader</h4>
+
+                            <div class="vertical-timeline-icon yellow-bg" style="top: inherit;left: inherit;background-color: #ff2f69;border-color: #ff0;">
+                                <i class="fa fa-comment"></i>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+
+            </div>
+            <hr>
+    </div>
+
+    <div class="container">
+
+    <!-- Features Section -->
+        
+        <div class="row" style="margin: 0px;">
+        
+            <div class="col-md-6 animated lightSpeedIn">
+                <a href="story?book=<?php echo $book;?>&id=<?php echo $story;?>">
+                    <img class="img-responsive" src="http://koshkcomics.com/koshk_dev/assets/cards/<?php echo $book;?>/<?php echo $story;?>/iphone4/img.jpg" alt="" style="padding: 15px;border-style: solid;border-width: 1px;border-color: #eee;">
+                </a>
+            </div>
+
+            <div class="col-md-6" style="padding-top: 8%;">
+
+                <h2 style="margin-top: -50px;text-align: center;padding-bottom: 80px;">Episode of the Day</h2>
+
+                <h2 style="text-align: center;"><?php echo $today[0]['name'];?></h2>
+                <strong> <h4 style="text-align: center;"><?php echo $today[0]['catname'];?></h4> </strong>
+
+                <ul style="margin-top: 30px;text-align: center;">
+                    <?php echo $today[0]['description'];?>
+                </ul>
+
+                <ul style="margin-top: 50px;">
+                    <a href="story?book=<?php echo $book;?>&id=<?php echo $story;?>">
+                    Read the Episode >
+                    </a>
+                </ul>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <div class="col-lg-12">
+                <h2 class="page-header"">New Comic Books we love</h2>
+        </div>
+        
+    </div>
+    <!-- Page Content -->
+    <div class="container" style="width: 100%;padding: 0px;">
+
+        <!-- Portfolio Section -->
+        <div class="row" style="margin: 0px;">
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=118">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/118/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=109">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/109/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=115">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/115/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=125">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/125/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=126">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/126/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=108">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/108/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container">
+
+                    <h1 class="page-header">
+                        Comic Book of The Month:   <?php echo $today[0]['catname'];?>
+                    </h1>
+                    
+                </div>
+            </div>
+            
+<div class="col-lg-12">
+            
+        
+        
+                <ul class="grid list-inline list-unstyled cs-style-1">
+                    <?php for($i=0;$i<=$count2;$i++): ?>
+                    
+                    <li>
+                        
+                        <figure>
+                            
+                            <img src="http://www.koshkcomics.com/koshk_dev/assets/cards/11/<?php echo $data[$i]['id'];?>/large/featured.jpg" alt="artwork">
+                            <figcaption style="background: rgba(255,255,255,0.8);width: 120px;position: absolute;margin-left: 76%;">
+                                
+                            </figcaption>
+
+                                <figcaption style="background: rgba(255,255,255,0.6);">
+                                    <a class="story_link" href="story?book=11&id=<?php echo $data[$i]['id'];?>">
+                                        <div class="col-lg-9">
+
+                                        <strong> <h3 style="margin-right: 20px;"><?php echo $data[$i]['name'];?></h3> </strong>
+                                        <p class="lead"> </p>
+                                        <p class="lead role" style="padding-left: 20px;padding-right: 20px;margin-top: 40px;"><?php echo $data[$i]['description'];?></p>
+                                        </div>
+                                        <div class="col-lg-3">
+                                        <i class="fa fa-share-alt" style="top: 0px;"></i>
+                                        </div>
+                                    </a> 
+                                </figcaption>
+                             
+                        </figure>
+                       
+                    </li>
+                    
+                    <?php endfor; ?>
+                 
+                    </ul>
+        
+        </div>
+
+        </div>
+        <!-- /.row -->
+
+
+        <!-- Footer -->
+        <footer>
+        <div class="container">
+        <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Koshk Comics 2017</p>
+                </div>
+            </div>
+        </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+@stop

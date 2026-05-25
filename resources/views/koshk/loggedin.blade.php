@@ -1,0 +1,227 @@
+@extends('layouts.headeronly')
+
+@section('page-title', 'Home')
+
+@section('content')
+
+<div id="wrapper" style="background-color: white;"> 
+        <div id="page-wrapper" class="gray-bg" style="margin-left: 0px;margin-top: 0px;">
+            <div class="row">
+            <!--
+            <div id="page-wrapper" class="gray-bg" style="margin-left: 0px;margin-top: -100px;">
+                <div class="row m-b-lg m-t-lg">
+                <div class="col-md-6">
+                <img src="assets/img/vanguard-logo.png" class="img-circle circle-border m-b-md" alt="profile" style="margin-top: 30px;margin-left: 100px;margin-bottom: -20px;">
+                </div>
+
+                    <div class="col-md-3">
+
+                        <div class="text-right" style="margin-top: 55px;">
+                        <a href="https://www.koshkcomics.com/public/login">
+                        <button type="submit" class="btn btn-primary m-t-n-xs" style="background-color: green;width: 100px;width: 100px;"><strong>Sign In</strong></button>
+                        </a>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="text-left" style="margin-top: 55px;">
+                            <a href="https://www.koshkcomics.com/public/register">
+                            <button type="submit" class="btn btn-primary m-t-n-xs" style="background-color: #ef3e79;width: 100px;border-color: #ef3e79;"><strong>Join</strong></button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div> -->
+            </div>
+
+
+        <div class="row" style="margin: 15px;">
+
+
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="{{ url('producer/tusenserier/folklore') }}">
+                    <img class="img-responsive img-portfolio img-hover" src="content/producer/tusenserier/activities/folklore/cover.jpg" alt="" style="margin-bottom: 0px;border-radius: 25px;">
+                </a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <div class="row" style="margin-bottom: 10%;">
+
+                </div>
+
+                <div class="row">
+                    <div class="p-m">
+
+                        <h2 class="m-xs" style="text-align: center;"></h2>
+
+                        <h1 class="m-xs" style="color: #f00;text-align: center;">Folklore!</h1>
+                        
+                        <h2 class="m-xs" style="text-align: center;"></h2>
+                        <h3 style="color: #fcd116;text-align: center;">Malmö, <strong style="color: #005b99;">Sweden</strong></h3>
+
+
+
+                    </div>
+
+                    <div class="p-m col-md-offset-3">
+                    
+                    <a href="{{ url('producer/tusenserier/folklore') }}">
+                    <button type="submit" class="btn btn-primary m-t-n-xs" style="background-color: green;width: 210px;height: 50px;font-size: large;margin-left: 30px;"><strong> Apply Now! </strong></button>
+                    </a>
+
+                    </div>
+
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div class="ibox-content" style="margin-top: 25px;">
+        <div class="row" style="margin: 15px;">
+
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <div class="row" style="margin-bottom: 10%;">
+
+                </div>
+
+                <div class="row">
+                    <div class="p-m">
+
+                        <h2 class="m-xs" style="text-align: center;"></h2>
+
+                        <h1 class="m-xs" style="text-align: center;">WORLD WAR III</h1>
+                        <h2 class="m-xs" style="text-align: center;">Comics Exhibition on Tour</h2>
+                        <h3 style="color: #fcd116;text-align: center;">Malmö, <strong style="color: #005b99;">Sweden</strong></h3>
+
+
+
+                    </div>
+                    <div class="p-m col-md-offset-3">
+                    
+                    <a href="{{ url('community/koshk/ww3') }}">
+                    <button type="submit" class="btn btn-primary m-t-n-xs" style="background-color: green;width: 280px;height: 50px;font-size: x-large;"><strong>Check Event Page</strong></button>
+                    </a>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding: 0px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="{{ url('community/koshk/ww3') }}">
+                    <img class="img-responsive img-portfolio img-hover" src="content/home/koshkstart.jpg" alt="" style="margin-bottom: 0px;border-radius: 25px;">
+                </a>
+            </div>
+        </div>
+        </div>
+
+        <!-- WW3
+        <div class="row">
+            <div class="col-lg-12" style="height: 100%;margin-top: 15px;">
+
+            <a href="https://www.koshkcomics.com/public/login">
+                <div class="no-padding img-responsive img-portfolio img-hover" style="background: url(content/home/ww3_banner.jpg) no-repeat;width: 100%;-webkit-background-size: 100%;">
+                    <
+                    <div class="p-m">
+
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart1"></div>
+                    </div>
+                </div>
+            </a>
+            </div>
+        </div> -->
+
+        @permission('users.manage')
+
+        <!-- Arabic Comics Community -->
+        <div class="row">
+            <div class="col-lg-12" style="height: 100%;margin-top: 25px;">
+            <a href="{{ url('community/arabiccomics') }}">
+                <div class="no-padding" style="background: url(content/home/ac_banner.jpg) no-repeat;width: 100%;-webkit-background-size: 100%;">
+                    <div class="p-m">
+                    <!-- 
+                        <h1 class="m-xs">$ 1,540</h1>
+
+                        <h3 class="font-bold no-margins">
+                            Annual income
+                        </h3>
+                        <small>Income form project Alpha.</small> -->
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart1"></div>
+                    </div>
+                </div>
+            </a>
+            </div>
+        </div>
+
+        <!-- CairoComix & Koshk
+        <div class="row">
+            <div class="col-lg-12" style="height: 100%;margin-top: 25px;">
+                <div class="no-padding" style="background: url(content/home/cx_banner.jpg) no-repeat;width: 100%;-webkit-background-size: 100%;">
+
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart1"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row m-t-lg">
+            <div class="col-lg-12">
+                <div class="ibox-content">
+
+            </div>
+
+            </div>
+
+        </div>
+
+        <div class="row" style="margin: 0px;">
+            <div class="col-md-6 col-sm-6" style="padding: 5px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=118">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/118/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 5px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=109">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/109/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 5px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=115">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/115/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6" style="padding: 5px;margin: -1px;border-color: #fff;border-width: 2px;border-style: solid;">
+                <a href="comicbook?id=126">
+                    <img class="img-responsive img-portfolio img-hover" src="http://koshkcomics.com/koshk_dev/assets/cards/126/xlarge/featured.jpg" alt="" style="margin-bottom: 0px;">
+                </a>
+            </div>
+            
+        </div>
+
+        @endpermission
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+        <div class="container">
+        <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Koshk Comics 2017</p>
+                </div>
+            </div>
+        </div>
+        </footer>
+
+        </div>
+
+@stop

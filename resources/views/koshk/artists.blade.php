@@ -1,0 +1,70 @@
+@extends('layouts.headeronly')
+
+@section('page-title', 'Home')
+
+@section('content')
+
+<div class="wrapper wrapper-content">
+
+        <!-- Arabic Comics Community -->
+        <div class="row">
+            <div class="col-lg-12" style="margin-bottom: 15px;">  
+                <div class="no-padding" style="background: {{  'url(' .'assets/content/artist/banner.jpg)' }} no-repeat;width: 100%;-webkit-background-size: 100%;">
+                    
+                    <div class="p-m">
+                    <!-- 
+                        <h1 class="m-xs">$ 1,540</h1>
+
+                        <h3 class="font-bold no-margins">
+                            Annual income
+                        </h3>
+                        <small>Income form project Alpha.</small> -->
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    <?php for($i=0;$i<$artists->count();$i++): ?>
+
+        @if (($i%3)==0)
+        <div class="row animated fadeInRight" style="margin: 0px;">
+        @endif
+
+        
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4><strong> {{ $artists[$i]->alias }} </strong></h4>
+                    </div>
+                    <a href=" {{ url('community/'.$artists[$i]->alias) }} " style="color: #000;">
+                        <div class="ibox-content no-padding border-left-right">
+                            <img alt="image" class="img-responsive" src="{{ url('assets/content/community/'.$artists[$i]->alias.'/profile.jpg') }}" style="margin-top: 10px;">
+                        </div>
+                    </a>
+                        <div class="ibox-content profile-content">
+                            <h5>
+                                Story
+                            </h5>
+                            <p>
+                                {{ substr($artists[$i]->story,0,300)  }}
+                            </p>
+                        </div>
+                </div>
+            </div>
+
+        @if ((($i+1)%3)==0)
+        </div>
+        @endif
+
+    <?php endfor; ?>
+
+        
+
+    </div>
+</div>
+
+@stop

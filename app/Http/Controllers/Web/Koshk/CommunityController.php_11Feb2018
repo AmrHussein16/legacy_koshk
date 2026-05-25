@@ -1,0 +1,296 @@
+<?php
+
+namespace Vanguard\Http\Controllers\Koshk;
+
+use Vanguard\Events\User\ChangedAvatar;
+use Vanguard\Events\User\TwoFactorDisabled;
+use Vanguard\Events\User\TwoFactorEnabled;
+use Vanguard\Events\User\UpdatedProfileDetails;
+use Vanguard\Http\Requests\User\EnableTwoFactorRequest;
+use Vanguard\Http\Requests\User\UpdateProfileDetailsRequest;
+use Vanguard\Http\Requests\User\UpdateProfileLoginDetailsRequest;
+use Vanguard\Http\Requests\User\UpdateUserRequest;
+use Vanguard\Repositories\Activity\ActivityRepository;
+use Vanguard\Repositories\Country\CountryRepository;
+use Vanguard\Repositories\Role\RoleRepository;
+use Vanguard\Repositories\Session\SessionRepository;
+use Vanguard\Repositories\User\UserRepository;
+use Vanguard\Services\Upload\UserAvatarManager;
+use Vanguard\Support\Enum\UserStatus;
+use Vanguard\User;
+use Auth;
+use Authy;
+use Illuminate\Http\Request;
+
+use Session;
+use Input;
+use Response; 
+
+
+use Vanguard\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\Crypt;
+
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Storage;
+
+//use Illuminate\Support\Facades\Input;
+
+/**
+ * Class CommunityController
+ * @package Vanguard\Http\Controllers\Koshk
+ */
+class CommunityController extends Controller
+{
+    /**
+     * @var User
+     */
+    protected $theUser;
+    /**
+     * @var UserRepository
+     */
+    private $users;
+
+    /**
+     * UsersController constructor.
+     * @param UserRepository $users
+     */
+    public function __construct(UserRepository $users)
+    {
+        $this->middleware('auth');
+        $this->middleware('session.database', ['only' => ['sessions', 'invalidateSession']]);
+
+        $this->users = $users;
+
+        $this->middleware(function ($request, $next) {
+            $this->theUser = Auth::user();
+            return $next($request);
+        });
+    }
+
+    /**
+     * Display user's profile page.
+     *
+     * @param RoleRepository $rolesRepo
+     * @param CountryRepository $countryRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(RoleRepository $rolesRepo, CountryRepository $countryRepository)
+    {
+
+        $user = $this->theUser;
+        $edit = true;
+        $roles = $rolesRepo->lists();
+        $socials = $user->socialNetworks;
+        $countries = [0 => 'Select a Country'] + $countryRepository->lists()->toArray();
+        $socialLogins = $this->users->getUserSocialLogins($this->theUser->id);
+        $statuses = UserStatus::lists();
+
+        $user = $this->theUser;
+
+        $communities = DB::table('community')->get();
+
+        return view('koshk.communities', compact('communities', 'user'));
+
+    }
+
+    public function community(Request $request, $comm_name)
+    {
+        $currentCommunity = DB::table('community')->get()->where('alias', strtolower($comm_name));
+        $activities = DB::table('commactivity')->get()->where('community_id', $currentCommunity->first()->id);
+
+        //dd($activities);
+        //echo $activities->count();
+    	
+        //echo 'community             '.$comm_name;
+
+        $user = $this->theUser;
+
+        $followStatus = DB::table('followcommunity')->where([
+          ['community_id', '=', $currentCommunity->first()->id],
+          ['user_id', '=', $user['id']]
+        ]
+        )->get();
+
+        if($followStatus->count() <= 0) /// there is NO  entry already
+        {
+          $community_id = $currentCommunity->first()->id;
+          $user_id = $user['id'];
+          DB::table('followcommunity')->insert(
+              ['community_id' => $community_id, 'user_id' => $user_id, 'status' => false]
+          );
+          $following = false;
+        } else {
+          $following = $followStatus->first()->status;
+        }
+
+    	//dd($currentCommunity);
+
+       return view('koshk.community', compact('currentCommunity', 'user', 'following', 'activities'));  
+
+    }
+
+    /**
+     * handle data posted by ajax request
+     */
+    public function follow() {
+
+        //check if its our form
+        if ( Session::token() !== Input::get( '_token' ) ) {
+            return Response::json( array(
+                'msg' => 'Unauthorized attempt to create setting'
+            ) );
+        }
+ 
+        $community_id = Input::get( 'community_id' );
+        $user_id = Input::get( 'user_id' );
+
+
+        $followStatus = DB::table('followcommunity')->where([
+
+          ['community_id', '=', $community_id],
+          ['user_id', '=', $user_id]
+        ]
+        )->get();
+
+          $response = array(
+              'community_id' => $community_id,
+              'user_id' => $user_id,
+              'status' => true,
+          );
+
+ 
+        if($followStatus->count() > 0) /// there is an entry already
+        {
+          $newStatus = !($followStatus->first()->status);
+
+          DB::table('followcommunity')
+            ->where(['community_id' => $community_id, 'user_id' => $user_id])
+            ->update(['status' => $newStatus]);
+
+          $response = array(
+            'community_id' => $community_id,
+            'user_id' => $user_id,
+            'status' => $newStatus,
+          );
+        } 
+        else  /// No entry ... 
+        {
+
+          DB::table('followcommunity')->insert(
+              ['community_id' => $community_id, 'user_id' => $user_id, 'status' => true]
+          );
+   
+          $response = array(
+              'community_id' => $community_id,
+              'user_id' => $user_id,
+              'status' => true,
+          );
+        }
+
+        return Response::json( $response );
+    }
+
+
+    public function activity(Request $request, $comm_name, $activity_name)
+    {
+    	//echo 'activity             '. $comm_name. '   '. $activity_name;
+
+        if ($request->has('submit')) {
+           
+              //Move Uploaded File
+              //$destinationPath = 'uploads';
+              //file->move($destinationPath,$file->getClientOriginalName());
+            
+            //$request->request->add(['comm_name' => $comm_name]);
+            //$request->request->add(['activity_name' => $activity_name]);
+
+            //return redirect()->route('submit', ['request' => $request] );
+
+            //submit($request, $comm_name, $activity_name);
+        }
+
+        $currentCommunity = DB::table('community')->get()->where('alias', strtolower($comm_name));
+        $currentActivity = DB::table('commactivity')->get()->where('alias', strtolower($activity_name));
+
+        $user = $this->theUser;
+
+        //dd($currentCommunity->first()->id);
+        if($currentActivity->count() > 0 && $currentCommunity->count() > 0 )
+        {
+            if ($currentCommunity->first()->id == $currentActivity->first()->community_id)
+            {
+              if($currentActivity->first()->alias == 'ww3')
+              {
+                return view('koshk.activity.'.$currentCommunity->first()->alias.'.'.$currentActivity->first()->alias, compact('currentCommunity', 'currentActivity','user'));
+              } else {
+                return view('koshk.activity', compact('currentCommunity', 'currentActivity','user'));
+              }
+        	   
+            }
+            else
+                echo 'event not matching community';
+        }
+        else
+            echo 'no event with that name';
+
+
+    }
+
+    public function submit(Request $request, $comm_name, $activity_name)
+    {
+
+      $IconImage = $request->file('IconImage');
+      $FeatureImage = $request->file('FeatureImage');
+      $Story = $request->file('Story');
+
+      $user = $this->theUser;
+
+      //Move Uploaded File
+      $destinationPath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix().'content/community/'.$comm_name.'/activities/'.$activity_name.'/'.$user['id'];
+
+      
+      if(!Storage::exists($destinationPath)) {
+            Storage::makeDirectory($destinationPath);
+        }
+
+
+        $currentCommunity = DB::table('community')->get()->where('alias', strtolower($comm_name));
+        $currentActivity = DB::table('activity')->get()->where('alias', strtolower($activity_name));
+        
+        $userid = $user['id'];
+        $activity_id = $currentActivity->first()->id;
+
+        $details = array("storytitletext"=>$request->get('storytitletext'),"storytext"=>$request->get('storytext'));
+
+        $json_details = json_encode($details);
+
+        $submission_id = DB::table('submission')->insertGetId(
+          ['user_id' => $userid , 
+           'activity_id' => $activity_id,
+           'response' => 'submit',
+           'details' => $json_details]
+        );
+
+        $IconImage->move($destinationPath,'ID_'.$submission_id.'_IconImage_'.date('Y_m_d_H_i_s_').$IconImage->getClientOriginalName());
+        $FeatureImage->move($destinationPath,'ID_'.$submission_id.'_FeatureImage_'.date('Y_m_d_H_i_s_').$FeatureImage->getClientOriginalName());
+        $Story->move($destinationPath,'ID_'.$submission_id.'_Story_'.date('Y_m_d_H_i_s_').$Story->getClientOriginalName());
+
+       return view('koshk.activity.submission', compact('currentCommunity', 'currentActivity','user','result'));
+   }
+
+    public function challenge(Request $request, $comm_name, $activity_name, $challenge_name)
+    {
+    	echo 'challenge             '.$comm_name. '   '. $activity_name. '   '. $challenge_name;
+
+    	dd($request);
+
+		
+
+		echo 'created object';
+
+		
+
+    }
+}
